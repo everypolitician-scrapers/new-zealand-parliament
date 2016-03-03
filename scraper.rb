@@ -7,11 +7,10 @@ require 'date'
 require 'open-uri'
 require 'date'
 
-# require 'colorize'
-# require 'pry'
-# require 'csv'
-# require 'open-uri/cached'
-# OpenURI::Cache.cache_path = '.cache'
+require 'colorize'
+require 'pry'
+require 'open-uri/cached'
+OpenURI::Cache.cache_path = '.cache'
 
 def noko(url)
   Nokogiri::HTML(open(url).read) 
@@ -47,7 +46,7 @@ page.xpath('//entry').each do |entry|
     source: mp_url,
   }
   data[:photo].prepend 'http://www.parliament.nz/' unless data[:photo].nil? or data[:photo].empty?
-  puts data
+  # puts data
   added += 1
   ScraperWiki.save_sqlite([:name, :term], data)
 end
