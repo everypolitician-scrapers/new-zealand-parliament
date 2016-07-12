@@ -25,12 +25,11 @@ url      = "#{base_url}/en/mps-and-electorates/members-of-parliament/"
 page     = noko(url)
 
 added = 0
-page.xpath('//entry').each do |entry|
-  id = entry.xpath('id').text
-  mp_url = entry.xpath('link/@href').text
-
-  mp = noko(mp_url)
-  body = mp.css('div.contentBody')
+page.css('.list__row').each do |entry|
+  link   = entry.css('.theme__link')
+  mp_url = link.attr('href').inner_text.prepend(base_url)
+  mp     = noko(mp_url)
+  body   = mp.css('div.koru-side-holder')
 
   data = {
     id: entry.xpath('id').text,
