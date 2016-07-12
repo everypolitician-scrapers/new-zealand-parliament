@@ -13,7 +13,7 @@ require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
 def noko(url)
-  Nokogiri::HTML(open(url).read) 
+  Nokogiri::HTML(open(url).read)
 end
 
 def datefrom(date)
@@ -21,7 +21,7 @@ def datefrom(date)
 end
 
 
-url = 'http://www.parliament.nz/en-nz/syndication?posting=/en-nz/mpp/mps/current/'
+url = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
 page = noko(url)
 
 added = 0
@@ -32,7 +32,7 @@ page.xpath('//entry').each do |entry|
   mp = noko(mp_url)
   body = mp.css('div.contentBody')
 
-  data = { 
+  data = {
     id: entry.xpath('id').text,
     name: body.css('a[href^=mailto]').text,
     sort_name: entry.xpath('title').text.strip,
@@ -51,5 +51,3 @@ page.xpath('//entry').each do |entry|
   ScraperWiki.save_sqlite([:name, :term], data)
 end
 puts "  Added #{added} members"
-
-
