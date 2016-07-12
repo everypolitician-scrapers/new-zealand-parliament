@@ -13,43 +13,40 @@ require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
 def noko(url)
-  Nokogiri::HTML(open(url).read) 
+  Nokogiri::HTML(open(url).read)
 end
 
 def datefrom(date)
   Date.parse(date)
 end
 
-
-url = 'http://www.parliament.nz/en-nz/syndication?posting=/en-nz/mpp/mps/current/'
-page = noko(url)
+base_url = 'https://www.parliament.nz'
+url      = "#{base_url}/en/mps-and-electorates/members-of-parliament/"
+page     = noko(url)
 
 added = 0
-page.xpath('//entry').each do |entry|
-  id = entry.xpath('id').text
-  mp_url = entry.xpath('link/@href').text
+page.css('.list__row').each do |entry|
+  link   = entry.css('.theme__link')
+  mp_url = link.attr('href').inner_text.prepend(base_url)
+  mp     = noko(mp_url)
+  body   = mp.css('div.koru-side-holder')
 
-  mp = noko(mp_url)
-  body = mp.css('div.contentBody')
-
-  data = { 
-    id: entry.xpath('id').text,
-    name: body.css('a[href^=mailto]').text,
-    sort_name: entry.xpath('title').text.strip,
-    party: entry.xpath('content').text.strip.split(/, /).first,
-    area: entry.xpath('content').text.strip.split(/, /).last,
-    photo: body.css('td.image img/@src').text,
-    email: body.css('a[href^=mailto]/@href').text.gsub('mailto:',''),
-    facebook: body.css('div.infoTiles a[@href*="facebook"]/@href').text,
-    twitter: body.css('div.infoTiles a[@href*="twitter"]/@href').text,
+  data = {
+    id: mp_url.split("/")[-2],
+    name: body.css("div[role='main']").css('h1').inner_text,
+    sort_name: link.inner_text.strip,
+    party: body.css('.informaltable td')[1].inner_text,
+    area:  body.css('.informaltable td')[0].inner_text,
+    photo: body.css('.document-panel__img img/@src').last.text,
+    email: body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
+    facebook: body.css('div.related-links__item a[@href*="facebook"]/@href').text,
+    twitter:  body.css('div.related-links__item a[@href*="twitter"]/@href').text,
     term: 51,
     source: mp_url,
   }
-  data[:photo].prepend 'http://www.parliament.nz/' unless data[:photo].nil? or data[:photo].empty?
-  # puts data
+  data[:photo].prepend(base_url) unless data[:photo].nil? or data[:photo].empty?
+
   added += 1
   ScraperWiki.save_sqlite([:name, :term], data)
 end
 puts "  Added #{added} members"
-
-
