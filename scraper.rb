@@ -20,9 +20,9 @@ def datefrom(date)
   Date.parse(date)
 end
 
-
-url = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
-page = noko(url)
+base_url = 'https://www.parliament.nz'
+url      = "#{base_url}/en/mps-and-electorates/members-of-parliament/"
+page     = noko(url)
 
 added = 0
 page.xpath('//entry').each do |entry|
