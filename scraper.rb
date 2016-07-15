@@ -42,8 +42,13 @@ page.css('.list__row').each do |entry|
     twitter:  body.css('div.related-links__item a[@href*="twitter"]/@href').text,
     term: 51,
     source: mp_url,
+    start_date: body.css('.informaltable td')[2].inner_text,
   }
+
   data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
+
+  d = datefrom(data[:start_date])
+  data[:start_date] = "#{d.year}-#{d.mon}-#{d.mday}"
 
   added += 1
   ScraperWiki.save_sqlite([:name, :term], data)
