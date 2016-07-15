@@ -31,18 +31,18 @@ page.css('.list__row').each do |entry|
   body   = mp.css('div.koru-side-holder')
 
   data = {
-    id: mp_url.split("/")[-2],
-    name: body.css("div[role='main']").css('h1').inner_text,
-    sort_name: link.inner_text.strip,
-    party: body.css('.informaltable td')[1].inner_text,
-    area:  body.css('.informaltable td')[0].inner_text,
-    photo: body.css('.document-panel__img img/@src').last.text,
-    email: body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
-    facebook: body.css('div.related-links__item a[@href*="facebook"]/@href').text,
-    twitter:  body.css('div.related-links__item a[@href*="twitter"]/@href').text,
-    term: 51,
-    source: mp_url,
+    id:         mp_url.split("/")[-2],
+    name:       body.css("div[role='main']").css('h1').inner_text,
+    sort_name:  link.inner_text.strip,
     start_date: body.css('.informaltable td')[2].inner_text,
+    party:      body.css('.informaltable td')[1].inner_text,
+    area:       body.css('.informaltable td')[0].inner_text,
+    photo:      body.css('.document-panel__img img/@src').last.text,
+    email:      body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
+    facebook:   body.css('div.related-links__item a[@href*="facebook"]/@href').text,
+    twitter:    body.css('div.related-links__item a[@href*="twitter"]/@href').text,
+    term:       51,
+    source:     mp_url
   }
 
   data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
