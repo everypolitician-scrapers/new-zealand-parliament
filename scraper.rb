@@ -21,6 +21,11 @@ def datefrom(date)
   Date.parse(date)
 end
 
+def formatdate(date)
+  return if date.to_s.strip.empty?
+  parsed_date = datefrom(date).to_s
+end
+
 base_url = 'https://www.parliament.nz'
 url      = "#{base_url}/en/mps-and-electorates/members-of-parliament/"
 page     = noko(url)
@@ -36,9 +41,6 @@ page.css('.list__row').each do |entry|
     id:         mp_url.split("/")[-2],
     name:       body.css("div[role='main']").css('h1').inner_text,
     sort_name:  link.inner_text.strip,
-    start_date: body.css('.informaltable td')[2].inner_text,
-    party:      body.css('.informaltable td')[1].inner_text,
-    area:       body.css('.informaltable td')[0].inner_text,
     photo:      body.css('.document-panel__img img/@src').last.text,
     email:      body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
     facebook:   body.css('div.related-links__item a[@href*="facebook"]/@href').text,
@@ -49,10 +51,16 @@ page.css('.list__row').each do |entry|
 
   data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
 
-  d = datefrom(data[:start_date])
-  data[:start_date] = "#{d.year}-#{d.mon}-#{d.mday}"
+  body.css('.informaltable tr').each do |row|
+    data[:area]       = row.css('td')[0].inner_text
+    data[:party]      = row.css('td')[1].inner_text
+    data[:start_date] = formatdate(row.css('td')[2].inner_text.split("-").first)
+    data[:end_date]   = formatdate(row.css('td')[2].inner_text.split("-").last)
+
+    ScraperWiki.save_sqlite([:id, :term, :start_date], data)
+  end
 
   added += 1
-  ScraperWiki.save_sqlite([:name, :term], data)
+
 end
 puts "  Added #{added} members"
