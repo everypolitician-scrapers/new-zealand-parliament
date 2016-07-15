@@ -11,6 +11,8 @@ require 'pry'
 require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
+TERM = 51
+
 def noko(url)
   Nokogiri::HTML(open(url).read)
 end
@@ -41,7 +43,7 @@ page.css('.list__row').each do |entry|
     email:      body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
     facebook:   body.css('div.related-links__item a[@href*="facebook"]/@href').text,
     twitter:    body.css('div.related-links__item a[@href*="twitter"]/@href').text,
-    term:       51,
+    term:       TERM,
     source:     mp_url
   }
 
