@@ -5,7 +5,6 @@ require 'scraperwiki'
 require 'nokogiri'
 require 'date'
 require 'open-uri'
-require 'date'
 
 require 'colorize'
 require 'pry'
