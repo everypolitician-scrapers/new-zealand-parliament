@@ -43,7 +43,8 @@ page.css('.list__row').each do |entry|
     term: 51,
     source: mp_url,
   }
-  data[:photo].prepend(base_url) unless data[:photo].nil? or data[:photo].empty?
+
+  data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
 
   added += 1
   ScraperWiki.save_sqlite([:name, :term], data)
