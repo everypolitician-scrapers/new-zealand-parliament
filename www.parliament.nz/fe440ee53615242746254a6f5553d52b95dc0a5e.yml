@@ -22,16 +22,16 @@ response:
     Content-Type:
     - text/html; charset=utf-8
     Expires:
-    - Wed, 14 Sep 2016 03:24:16 GMT
+    - Thu, 15 Sep 2016 08:57:35 GMT
     Last-Modified:
-    - Wed, 14 Sep 2016 03:22:52 GMT
+    - Thu, 15 Sep 2016 08:13:59 GMT
     Vary:
     - Accept-Encoding
     Date:
-    - Wed, 14 Sep 2016 03:24:16 GMT
+    - Thu, 15 Sep 2016 08:57:36 GMT
     Content-Length:
-    - '10571'
+    - '10581'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Wed, 14 Sep 2016 03:23:04 GMT
+recorded_at: Thu, 15 Sep 2016 08:56:01 GMT
