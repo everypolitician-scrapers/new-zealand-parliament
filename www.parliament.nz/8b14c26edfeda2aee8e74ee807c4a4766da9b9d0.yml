@@ -1,0 +1,37 @@
+---
+request:
+  method: get
+  uri: https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/document/51MPbarrycoates1/coates-barry
+  body:
+    encoding: US-ASCII
+    string: ''
+  headers:
+    Accept-Encoding:
+    - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+    Accept:
+    - '*/*'
+    User-Agent:
+    - Ruby
+response:
+  status:
+    code: 200
+    message: OK
+  headers:
+    Cache-Control:
+    - public
+    Content-Type:
+    - text/html; charset=utf-8
+    Expires:
+    - Fri, 07 Oct 2016 07:49:51 GMT
+    Last-Modified:
+    - Fri, 07 Oct 2016 03:40:03 GMT
+    Vary:
+    - Accept-Encoding
+    Date:
+    - Fri, 07 Oct 2016 07:49:51 GMT
+    Content-Length:
+    - '9853'
+  body:
+    encoding: ASCII-8BIT
+  http_version: 
+recorded_at: Fri, 07 Oct 2016 07:49:52 GMT
