@@ -22,16 +22,20 @@ response:
     Content-Type:
     - text/html; charset=utf-8
     Expires:
-    - Sun, 09 Oct 2016 20:53:49 GMT
+    - Tue, 11 Oct 2016 22:54:52 GMT
     Last-Modified:
-    - Sun, 09 Oct 2016 20:38:22 GMT
-    Vary:
-    - Accept-Encoding
+    - Tue, 11 Oct 2016 22:54:10 GMT
+    Etag:
+    - '"1476226451:dtagent1305CFtC"'
+    X-Dynatrace-Js-Agent:
+    - 'true'
+    Set-Cookie:
+    - dtCookie=17118A4EE174EED94A1B05A0FD3F0E2D|X2RlZmF1bHR8MQ; Path=/; Domain=.www.parliament.nz
     Date:
-    - Sun, 09 Oct 2016 20:53:49 GMT
+    - Tue, 11 Oct 2016 22:54:52 GMT
     Content-Length:
-    - '10129'
+    - '40772'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Sun, 09 Oct 2016 20:53:49 GMT
+recorded_at: Tue, 11 Oct 2016 22:54:53 GMT
