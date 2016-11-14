@@ -14,19 +14,18 @@ def noko(url)
   Nokogiri::HTML(open(url).read)
 end
 
-base_url = 'https://www.parliament.nz'
-url      = "#{base_url}/en/mps-and-electorates/members-of-parliament/"
-page     = noko(url)
+base = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
+page = noko(base)
 
 added = 0
 page.css('.list__row').each do |entry|
   link   = entry.css('.theme__link')
-  mp_url = link.attr('href').inner_text.prepend(base_url)
+  mp_url = URI.join(base, link.attr('href').text)
   mp     = noko(mp_url)
   body   = mp.css('div.koru-side-holder')
 
   data = {
-    id: mp_url.split("/")[-2],
+    id: mp_url.to_s.split("/")[-2],
     name: body.css("div[role='main']").css('h1').inner_text,
     sort_name: link.inner_text.strip,
     party: body.css('.informaltable td')[1].inner_text,
@@ -36,9 +35,9 @@ page.css('.list__row').each do |entry|
     facebook: body.css('div.related-links__item a[@href*="facebook"]/@href').text,
     twitter:  body.css('div.related-links__item a[@href*="twitter"]/@href').text,
     term: 51,
-    source: mp_url,
+    source: mp_url.to_s,
   }
-  data[:photo].prepend(base_url) unless data[:photo].nil? or data[:photo].empty?
+  data[:photo] = URI.join(base, data[:photo]).to_s unless data[:photo].to_s.empty?
 
   added += 1
   ScraperWiki.save_sqlite([:id, :term], data)
