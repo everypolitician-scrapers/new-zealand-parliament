@@ -45,6 +45,6 @@ page.css('.list__row').each do |entry|
   data[:photo].prepend(base_url) unless data[:photo].nil? or data[:photo].empty?
 
   added += 1
-  ScraperWiki.save_sqlite([:name, :term], data)
+  ScraperWiki.save_sqlite([:id, :term], data)
 end
 puts "  Added #{added} members"
