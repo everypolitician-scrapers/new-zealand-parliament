@@ -18,10 +18,6 @@ def noko(url)
   Nokogiri::HTML(open(url).read)
 end
 
-def datefrom(date)
-  Date.parse(date)
-end
-
 base_url = 'https://www.parliament.nz'
 url      = "#{base_url}/en/mps-and-electorates/members-of-parliament/"
 page     = noko(url)
