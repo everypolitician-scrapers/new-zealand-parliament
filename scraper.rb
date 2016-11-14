@@ -1,17 +1,13 @@
 #!/bin/env ruby
 # encoding: utf-8
 
-require 'scraperwiki'
 require 'nokogiri'
-require 'date'
 require 'open-uri'
-require 'date'
-
-require 'colorize'
 require 'pry'
+require 'scraperwiki'
+
 # require 'open-uri/cached'
 # OpenURI::Cache.cache_path = '.cache'
-
 require 'scraped_page_archive/open-uri'
 
 def noko(url)
