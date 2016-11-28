@@ -46,6 +46,12 @@ class CurrentMemberPage < Scraped::HTML
     latest_membership[0].text.tidy
   end
 
+  # TODO extract all memberships in the current term
+  field :start_date do
+    sd = '%d-%02d-%02d' % latest_membership[2].text.tidy.split('/').reverse.map(&:to_i)
+    sd > '2014-09-20' ? sd : '2014-09-20'
+  end
+
   # TODO use absolute URL decorator
   field :photo do
     raw = body.css('.document-panel__img img/@src').last.text
