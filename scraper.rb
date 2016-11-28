@@ -27,29 +27,30 @@ def scrape_list(url)
   page.css('.list__row').each do |entry|
     link   = entry.css('.theme__link')
     mp_url = URI.join(url, link.attr('href').text)
-    mp     = noko(mp_url)
-    body   = mp.css('div.koru-side-holder')
-
-    data = {
-      id: mp_url.to_s.split("/")[-2],
-      name: body.css("div[role='main']").css('h1').inner_text,
-      sort_name: mp.css('title').text.split(' - ').first.tidy,
-      party: body.css('.informaltable td')[1].inner_text,
-      area:  body.css('.informaltable td')[0].inner_text,
-      photo: body.css('.document-panel__img img/@src').last.text,
-      email: body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
-      facebook: body.css('div.related-links__item a[@href*="facebook"]/@href').text,
-      twitter:  body.css('div.related-links__item a[@href*="twitter"]/@href').text,
-      term: 51,
-      source: mp_url.to_s,
-    }
-    data[:photo] = URI.join(url, data[:photo]).to_s unless data[:photo].to_s.empty?
-
+    scrape_mp(mp_url)
     added += 1
-    warn data
-    ScraperWiki.save_sqlite([:id, :term], data)
   end
   puts "  Added #{added} members"
+end
+
+def scrape_mp(mp_url)
+  mp     = noko(mp_url)
+  body   = mp.css('div.koru-side-holder')
+  data = {
+    id: mp_url.to_s.split("/")[-2],
+    name: body.css("div[role='main']").css('h1').inner_text,
+    sort_name: mp.css('title').text.split(' - ').first.tidy,
+    party: body.css('.informaltable td')[1].inner_text,
+    area:  body.css('.informaltable td')[0].inner_text,
+    photo: body.css('.document-panel__img img/@src').last.text,
+    email: body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
+    facebook: body.css('div.related-links__item a[@href*="facebook"]/@href').text,
+    twitter:  body.css('div.related-links__item a[@href*="twitter"]/@href').text,
+    term: 51,
+    source: mp_url.to_s,
+  }
+  data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
+  ScraperWiki.save_sqlite([:id, :term], data)
 end
 
 scrape_list 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
