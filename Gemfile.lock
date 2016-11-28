@@ -1,4 +1,10 @@
 GIT
+  remote: https://github.com/everypolitician/combine_popolo_memberships.git
+  revision: 0a18a0defb11cf08f59f7f6cdc8de898227cbe89
+  specs:
+    combine_popolo_memberships (0.2.0)
+
+GIT
   remote: https://github.com/everypolitician/scraped.git
   revision: aabdf259f6cc2f746b50352e078a9141450e8d6e
   specs:
@@ -73,6 +79,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  combine_popolo_memberships!
   nokogiri
   open-uri-cached
   pry
