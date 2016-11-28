@@ -6,6 +6,8 @@ require 'open-uri'
 require 'pry'
 require 'scraped'
 require 'scraperwiki'
+require 'csv'
+require 'combine_popolo_memberships'
 
 # require 'open-uri/cached'
 # OpenURI::Cache.cache_path = '.cache'
@@ -25,6 +27,33 @@ class CurrentMembersPage < Scraped::HTML
   end
 end
 
+class MembershipRow < Scraped::HTML
+  field :area do
+    td[0].text.tidy
+  end
+
+  field :party do
+    td[1].text.tidy
+  end
+
+  field :start_date do
+    '%d-%02d-%02d' % td[2].text.tidy.split('/').reverse.map(&:to_i)
+  end
+
+  field :end_date do
+    return unless td[3]
+    ed = td[3].text.tidy
+    return if ed.empty?
+    '%d-%02d-%02d' % ed.split('/').reverse.map(&:to_i)
+  end
+
+  private
+
+  def td
+    noko.css('td')
+  end
+end
+
 class CurrentMemberPage < Scraped::HTML
   field :id do
     url.to_s.split("/")[-2]
@@ -36,20 +65,6 @@ class CurrentMemberPage < Scraped::HTML
 
   field :sort_name do
     noko.css('title').text.split(' - ').first.tidy
-  end
-
-  field :party do
-    latest_membership[1].text.tidy
-  end
-
-  field :area do
-    latest_membership[0].text.tidy
-  end
-
-  # TODO extract all memberships in the current term
-  field :start_date do
-    sd = '%d-%02d-%02d' % latest_membership[2].text.tidy.split('/').reverse.map(&:to_i)
-    sd > '2014-09-20' ? sd : '2014-09-20'
   end
 
   # TODO use absolute URL decorator
@@ -71,16 +86,18 @@ class CurrentMemberPage < Scraped::HTML
     body.css('div.related-links__item a[@href*="twitter"]/@href').text
   end
 
-  field :term do
-    51
-  end
-
   field :source do
     url.to_s
   end
 
   field :honorific_prefix do
     'Dr' if raw_name.start_with? 'Dr '
+  end
+
+  field :memberships do
+    noko.css('.body-text').xpath('//table[.//th[.="Party"]]').first.css('tr').map do |tr|
+      MembershipRow.new(response: response, noko: tr).to_h
+    end
   end
 
   private
@@ -92,11 +109,13 @@ class CurrentMemberPage < Scraped::HTML
   def raw_name
     body.css("div[role='main'] h1").text.sub(/^(Rt )?Hon /,'').tidy
   end
-
-  def latest_membership
-    body.css('.informaltable tr').first.css('td')
-  end
 end
+
+EPTERMS = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/New_Zealand/House/sources/manual/terms.csv'
+
+all_terms = CSV.parse(
+  open(EPTERMS).read, headers: true, header_converters: :symbol
+).map(&:to_h)
 
 current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
 cur_res = Scraped::Request.new(url: current).response
@@ -106,6 +125,10 @@ r.member_urls.each do |url|
   data = CurrentMemberPage.new(
     response: Scraped::Request.new(url: url).response
   ).to_h
-  ScraperWiki.save_sqlite([:id, :term], data)
+  memberships = data.delete(:memberships).each { |m| m[:id] = data[:id] }
+  combined = CombinePopoloMemberships.combine(id: memberships, term: all_terms)
+
+  allmems = combined.map { |mem| data.merge(mem) }.select { |t| t[:term] == '51' }
+  ScraperWiki.save_sqlite([:id, :term, :start_date], allmems)
 end
 
