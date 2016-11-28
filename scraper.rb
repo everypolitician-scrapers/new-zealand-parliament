@@ -39,11 +39,17 @@ class CurrentMemberPage < Scraped::HTML
   end
 
   field :party do
-    body.css('.informaltable td')[1].inner_text
+    latest_membership[1].text.tidy
   end
 
   field :area do
-    body.css('.informaltable td')[0].inner_text.tidy
+    latest_membership[0].text.tidy
+  end
+
+  # TODO extract all memberships in the current term
+  field :start_date do
+    sd = '%d-%02d-%02d' % latest_membership[2].text.tidy.split('/').reverse.map(&:to_i)
+    sd > '2014-09-20' ? sd : '2014-09-20'
   end
 
   # TODO use absolute URL decorator
@@ -85,6 +91,10 @@ class CurrentMemberPage < Scraped::HTML
 
   def raw_name
     body.css("div[role='main'] h1").text.sub(/^(Rt )?Hon /,'').tidy
+  end
+
+  def latest_membership
+    body.css('.informaltable tr').first.css('td')
   end
 end
 
