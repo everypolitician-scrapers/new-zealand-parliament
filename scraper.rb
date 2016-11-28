@@ -50,6 +50,7 @@ def scrape_mp(mp_url)
     source: mp_url.to_s,
   }
   data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
+  data[:honorific_prefix] = 'Dr' if data[:name].sub!(/^Dr /,'')
   ScraperWiki.save_sqlite([:id, :term], data)
 end
 
