@@ -4,6 +4,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
+require 'scraped'
 require 'scraperwiki'
 
 # require 'open-uri/cached'
@@ -16,21 +17,16 @@ class String
   end
 end
 
-def noko(url)
-  Nokogiri::HTML(open(url).read)
+class CurrentMembersPage < Scraped::HTML
+  field :member_urls do
+    noko.css('.list__row').map do |entry|
+      URI.join(url, entry.css('a.theme__link/@href').text).to_s
+    end
+  end
 end
 
-def scrape_list(url)
-  page = noko(url)
-
-  added = 0
-  page.css('.list__row').each do |entry|
-    link   = entry.css('.theme__link')
-    mp_url = URI.join(url, link.attr('href').text)
-    scrape_mp(mp_url)
-    added += 1
-  end
-  puts "  Added #{added} members"
+def noko(url)
+  Nokogiri::HTML(open(url).read)
 end
 
 def scrape_mp(mp_url)
@@ -51,7 +47,15 @@ def scrape_mp(mp_url)
   }
   data[:photo] = URI.join(mp_url, data[:photo]).to_s unless data[:photo].to_s.empty?
   data[:honorific_prefix] = 'Dr' if data[:name].sub!(/^Dr /,'')
+  warn data
   ScraperWiki.save_sqlite([:id, :term], data)
 end
 
-scrape_list 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
+current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
+cur_res = Scraped::Request.new(url: current).response
+
+r = CurrentMembersPage.new(response: cur_res)
+r.member_urls.each do |url|
+  scrape_mp(url)
+end
+
