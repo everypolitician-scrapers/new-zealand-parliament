@@ -33,7 +33,7 @@ def scrape_list(url)
     data = {
       id: mp_url.to_s.split("/")[-2],
       name: body.css("div[role='main']").css('h1').inner_text,
-      sort_name: link.inner_text.strip,
+      sort_name: mp.css('title').text.split(' - ').first.tidy,
       party: body.css('.informaltable td')[1].inner_text,
       area:  body.css('.informaltable td')[0].inner_text,
       photo: body.css('.document-panel__img img/@src').last.text,
