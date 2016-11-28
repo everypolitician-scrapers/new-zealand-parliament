@@ -41,7 +41,7 @@ def scrape_mp(mp_url)
     name: body.css("div[role='main'] h1").text.sub(/^(Rt )?Hon /,'').tidy,
     sort_name: mp.css('title').text.split(' - ').first.tidy,
     party: body.css('.informaltable td')[1].inner_text,
-    area:  body.css('.informaltable td')[0].inner_text,
+    area:  body.css('.informaltable td')[0].inner_text.tidy,
     photo: body.css('.document-panel__img img/@src').last.text,
     email: body.css('a.square-btn').attr('href').inner_text.gsub('mailto:',''),
     facebook: body.css('div.related-links__item a[@href*="facebook"]/@href').text,
