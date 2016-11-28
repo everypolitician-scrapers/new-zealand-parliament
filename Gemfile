@@ -2,12 +2,14 @@
 # specified here will be installed and made available to your morph.io scraper.
 # Find out more: https://morph.io/documentation/ruby
 
-source "https://rubygems.org"
+ruby '2.0.0'
 
-ruby "2.0.0"
+source 'https://rubygems.org'
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
-gem "scraperwiki", git: "https://github.com/openaustralia/scraperwiki-ruby.git", branch: "morph_defaults"
-gem "pry"
-gem "nokogiri"
-gem "open-uri-cached"
+gem 'nokogiri'
+gem 'open-uri-cached'
+gem 'pry'
+gem 'rubocop'
 gem 'scraped_page_archive'
+gem 'scraperwiki', github: 'openaustralia/scraperwiki-ruby', branch: 'morph_defaults'
