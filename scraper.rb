@@ -38,7 +38,7 @@ def scrape_mp(mp_url)
   body   = mp.css('div.koru-side-holder')
   data = {
     id: mp_url.to_s.split("/")[-2],
-    name: body.css("div[role='main']").css('h1').inner_text,
+    name: body.css("div[role='main'] h1").text.sub(/^(Rt )?Hon /,'').tidy,
     sort_name: mp.css('title').text.split(' - ').first.tidy,
     party: body.css('.informaltable td')[1].inner_text,
     area:  body.css('.informaltable td')[0].inner_text,
