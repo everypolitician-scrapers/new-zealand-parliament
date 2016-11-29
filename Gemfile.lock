@@ -5,6 +5,12 @@ GIT
     combine_popolo_memberships (0.2.0)
 
 GIT
+  remote: https://github.com/everypolitician/field_serializer.git
+  revision: a09f9a73655558190e169d5cae2738a9006fd833
+  specs:
+    field_serializer (0.2.0)
+
+GIT
   remote: https://github.com/everypolitician/scraped.git
   revision: aabdf259f6cc2f746b50352e078a9141450e8d6e
   specs:
@@ -31,7 +37,6 @@ GEM
     coderay (1.1.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    field_serializer (0.2.0)
     git (1.3.0)
     hashdiff (0.3.1)
     httpclient (2.6.0.1)
@@ -80,6 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   combine_popolo_memberships!
+  field_serializer!
   nokogiri
   open-uri-cached
   pry
