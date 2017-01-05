@@ -17,12 +17,6 @@ require_rel 'lib'
 # OpenURI::Cache.cache_path = '.cache'
 require 'scraped_page_archive/open-uri'
 
-class String
-  def tidy
-    gsub(/[[:space:]]+/, ' ').strip
-  end
-end
-
 EPTERMS = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/New_Zealand/House/sources/manual/terms.csv'
 
 all_terms = CSV.parse(
