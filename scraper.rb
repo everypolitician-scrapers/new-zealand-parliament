@@ -31,7 +31,9 @@ scrape(current => CurrentMembersPage).member_urls.each do |url|
   data = scrape(url => CurrentMemberPage).to_h
   memberships = data.delete(:memberships).map(&:to_h).each { |m| m[:id] = data[:id] }
   combined = CombinePopoloMemberships.combine(id: memberships, term: all_terms)
+  current = combined.select { |t| t[:term] == '51' }
 
-  allmems = combined.map { |mem| data.merge(mem) }.select { |t| t[:term] == '51' }
-  ScraperWiki.save_sqlite(%i(id term start_date), allmems)
+  wanted = %i(start_date end_date area party term)
+  mems = current.map { |mem| data.merge(mem.keep_if { |k, v| wanted.include? k }) }
+  ScraperWiki.save_sqlite(%i(id term start_date), mems)
 end
