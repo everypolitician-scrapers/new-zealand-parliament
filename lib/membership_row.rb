@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'scraped'
 
 class MembershipRow < Scraped::HTML
