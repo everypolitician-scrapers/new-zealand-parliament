@@ -17,6 +17,11 @@ require_rel 'lib'
 # OpenURI::Cache.cache_path = '.cache'
 require 'scraped_page_archive/open-uri'
 
+def scrape(h)
+  url, klass = h.to_a.first
+  klass.new(response: Scraped::Request.new(url: url).response)
+end
+
 EPTERMS = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/New_Zealand/House/sources/manual/terms.csv'
 
 all_terms = CSV.parse(
@@ -24,14 +29,9 @@ all_terms = CSV.parse(
 ).map(&:to_h)
 
 current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
-cur_res = Scraped::Request.new(url: current).response
-
-r = CurrentMembersPage.new(response: cur_res)
-r.member_urls.each do |url|
-  data = CurrentMemberPage.new(
-    response: Scraped::Request.new(url: url).response
-  ).to_h
-  memberships = data.delete(:memberships).each { |m| m[:id] = data[:id] }
+scrape(current => CurrentMembersPage).member_urls.each do |url|
+  data = scrape(url => CurrentMemberPage).to_h
+  memberships = data.delete(:memberships).map(&:to_h).each { |m| m[:id] = data[:id] }
   combined = CombinePopoloMemberships.combine(id: memberships, term: all_terms)
 
   allmems = combined.map { |mem| data.merge(mem) }.select { |t| t[:term] == '51' }
