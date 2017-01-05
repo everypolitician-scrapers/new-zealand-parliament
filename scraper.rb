@@ -2,14 +2,12 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
-require 'nokogiri'
-require 'open-uri'
+require 'combine_popolo_memberships'
+require 'csv'
 require 'pry'
+require 'require_all'
 require 'scraped'
 require 'scraperwiki'
-require 'csv'
-require 'combine_popolo_memberships'
-require 'require_all'
 
 require_rel 'lib'
 
