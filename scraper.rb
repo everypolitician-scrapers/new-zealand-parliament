@@ -1,5 +1,6 @@
 #!/bin/env ruby
 # encoding: utf-8
+# frozen_string_literal: true
 
 require 'nokogiri'
 require 'open-uri'
@@ -40,6 +41,5 @@ r.member_urls.each do |url|
   combined = CombinePopoloMemberships.combine(id: memberships, term: all_terms)
 
   allmems = combined.map { |mem| data.merge(mem) }.select { |t| t[:term] == '51' }
-  ScraperWiki.save_sqlite([:id, :term, :start_date], allmems)
+  ScraperWiki.save_sqlite(%i(id term start_date), allmems)
 end
-

@@ -1,20 +1,21 @@
+# frozen_string_literal: true
 require 'scraped'
 require_relative 'membership_row'
 
 class CurrentMemberPage < Scraped::HTML
   field :id do
-    url.to_s.split("/")[-2]
+    url.to_s.split('/')[-2]
   end
 
   field :name do
-    raw_name.sub(/^Dr /,'').tidy
+    raw_name.sub(/^Dr /, '').tidy
   end
 
   field :sort_name do
     noko.css('title').text.split(' - ').first.tidy
   end
 
-  # TODO use absolute URL decorator
+  # TODO: use absolute URL decorator
   field :photo do
     raw = body.css('.document-panel__img img/@src').last.text
     return if raw.to_s.empty?
@@ -22,7 +23,7 @@ class CurrentMemberPage < Scraped::HTML
   end
 
   field :email do
-    body.css('a.square-btn').attr('href').inner_text.gsub('mailto:','')
+    body.css('a.square-btn').attr('href').inner_text.gsub('mailto:', '')
   end
 
   field :facebook do
@@ -54,6 +55,6 @@ class CurrentMemberPage < Scraped::HTML
   end
 
   def raw_name
-    body.css("div[role='main'] h1").text.sub(/^(Rt )?Hon /,'').tidy
+    body.css("div[role='main'] h1").text.sub(/^(Rt )?Hon /, '').tidy
   end
 end
