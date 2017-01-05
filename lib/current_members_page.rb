@@ -2,9 +2,11 @@
 require 'scraped'
 
 class CurrentMembersPage < Scraped::HTML
+  decorator Scraped::Response::Decorator::AbsoluteUrls
+
   field :member_urls do
     noko.css('.list__row').map do |entry|
-      URI.join(url, entry.css('a.theme__link/@href').text).to_s
+      entry.css('a.theme__link/@href').text
     end
   end
 end
