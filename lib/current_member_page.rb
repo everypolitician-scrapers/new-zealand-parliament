@@ -3,6 +3,8 @@ require 'scraped'
 require_relative 'membership_row'
 
 class CurrentMemberPage < Scraped::HTML
+  decorator Scraped::Response::Decorator::AbsoluteUrls
+
   field :id do
     url.to_s.split('/')[-2]
   end
@@ -15,11 +17,8 @@ class CurrentMemberPage < Scraped::HTML
     noko.css('title').text.split(' - ').first.tidy
   end
 
-  # TODO: use absolute URL decorator
   field :photo do
-    raw = body.css('.document-panel__img img/@src').last.text
-    return if raw.to_s.empty?
-    URI.join(url, raw).to_s
+    body.css('.document-panel__img img/@src').last.text
   end
 
   field :email do
