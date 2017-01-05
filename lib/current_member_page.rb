@@ -43,7 +43,7 @@ class CurrentMemberPage < Scraped::HTML
 
   field :memberships do
     noko.css('.body-text').xpath('//table[.//th[.="Party"]]').first.css('tr').map do |tr|
-      MembershipRow.new(response: response, noko: tr).to_h
+      fragment tr => MembershipRow
     end
   end
 
