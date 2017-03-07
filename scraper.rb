@@ -25,7 +25,7 @@ all_terms = CSV.parse(
   open(EPTERMS).read, headers: true, header_converters: :symbol
 ).map(&:to_h)
 
-ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
 scrape(current => CurrentMembersPage).member_urls.each do |url|
   data = scrape(url => CurrentMemberPage).to_h
