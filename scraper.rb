@@ -34,7 +34,7 @@ scrape(current => CurrentMembersPage).member_urls.each do |url|
   current = combined.select { |t| t[:term] == '51' }
 
   wanted = %i(start_date end_date area party term)
-  mems = current.map { |mem| data.merge(mem.keep_if { |k, v| wanted.include? k }) }
+  mems = current.map { |mem| data.merge(mem.keep_if { |k, _v| wanted.include? k }) }
   ScraperWiki.save_sqlite(%i(id term start_date), mems)
   rows = ScraperWiki.select('COUNT(*) AS rows FROM data WHERE id = ?', data[:id]).first['rows']
   warn "Row mismatch for #{data[:id]}: Have #{rows}, expected #{mems.count}" if rows != mems.count
