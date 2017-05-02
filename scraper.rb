@@ -29,7 +29,7 @@ ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
 scrape(current => CurrentMembersPage).member_urls.each do |url|
   data = scrape(url => CurrentMemberPage).to_h
-  memberships = data.delete(:memberships).map(&:to_h).each { |m| m[:id] = data[:id] }
+  memberships = data.delete(:memberships).each { |m| m[:id] = data[:id] }
   combined = CombinePopoloMemberships.combine(id: memberships, term: all_terms)
   current = combined.select { |t| t[:term] == '51' }
 
