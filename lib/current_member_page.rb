@@ -7,7 +7,7 @@ class CurrentMemberPage < Scraped::HTML
   decorator Scraped::Response::Decorator::CleanUrls
 
   field :id do
-    url.to_s.split('/')[-2]
+    url.to_s.split('/').last
   end
 
   field :name do
@@ -43,7 +43,7 @@ class CurrentMemberPage < Scraped::HTML
   end
 
   field :memberships do
-    noko.css('.body-text').xpath('//table[.//th[.="Party"]]').first.css('tr').map do |tr|
+    noko.css('.body-text').xpath('//table[.//thead//td//p[.="Party"]]').first.css('tbody tr').map do |tr|
       fragment tr => MembershipRow
     end
   end
