@@ -4,7 +4,7 @@ require 'scraped'
 require_relative 'membership_row'
 
 class CurrentMemberPage < Scraped::HTML
-  decorator Scraped::Response::Decorator::AbsoluteUrls
+  decorator Scraped::Response::Decorator::CleanUrls
 
   field :id do
     url.to_s.split('/')[-2]
