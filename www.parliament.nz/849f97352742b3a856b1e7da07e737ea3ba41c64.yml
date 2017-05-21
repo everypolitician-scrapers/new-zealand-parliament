@@ -17,17 +17,26 @@ response:
     code: 200
     message: OK
   headers:
-    Cache-Control:
-    - private
+    Date:
+    - Sun, 21 May 2017 15:34:52 GMT
     Content-Type:
     - text/html; charset=utf-8
+    Transfer-Encoding:
+    - chunked
+    Connection:
+    - keep-alive
+    Set-Cookie:
+    - __cfduid=d9079eb4dc351198bd9b8daa54963f3a41495380891; expires=Mon, 21-May-18
+      15:34:51 GMT; path=/; domain=.www.parliament.nz; HttpOnly
+    Cache-Control:
+    - private
     Vary:
     - Accept-Encoding
-    Date:
-    - Sat, 20 May 2017 03:25:53 GMT
-    Content-Length:
-    - '11315'
+    Server:
+    - cloudflare-nginx
+    Cf-Ray:
+    - 36289a2e49e46df6-SJC
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Sat, 20 May 2017 03:25:54 GMT
+recorded_at: Sun, 21 May 2017 15:34:52 GMT
