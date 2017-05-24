@@ -18,7 +18,7 @@ response:
     message: OK
   headers:
     Date:
-    - Tue, 23 May 2017 15:11:52 GMT
+    - Wed, 24 May 2017 15:34:07 GMT
     Content-Type:
     - text/html; charset=utf-8
     Transfer-Encoding:
@@ -26,8 +26,8 @@ response:
     Connection:
     - keep-alive
     Set-Cookie:
-    - __cfduid=d3b58035a05f1331f95c533a7c2095ac71495552311; expires=Wed, 23-May-18
-      15:11:51 GMT; path=/; domain=.www.parliament.nz; HttpOnly
+    - __cfduid=d21007a5e409a810dd010319c6a7b5be71495640045; expires=Thu, 24-May-18
+      15:34:05 GMT; path=/; domain=.www.parliament.nz; HttpOnly
     Cache-Control:
     - private
     Vary:
@@ -35,8 +35,8 @@ response:
     Server:
     - cloudflare-nginx
     Cf-Ray:
-    - 3638f3387ce551a0-SJC
+    - 3641512cee7f6d12-SJC
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Tue, 23 May 2017 15:11:52 GMT
+recorded_at: Wed, 24 May 2017 15:34:07 GMT
