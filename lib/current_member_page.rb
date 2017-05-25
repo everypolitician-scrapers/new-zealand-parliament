@@ -2,9 +2,11 @@
 
 require 'scraped'
 require_relative 'membership_row'
+require_relative 'deobfuscated_email_addresses'
 
 class CurrentMemberPage < Scraped::HTML
   decorator Scraped::Response::Decorator::CleanUrls
+  decorator DeobfuscatedEmailAddresses
 
   field :id do
     url.to_s.split('/').last
@@ -23,7 +25,7 @@ class CurrentMemberPage < Scraped::HTML
   end
 
   field :email do
-    body.css('a.square-btn').attr('href').inner_text.gsub('mailto:', '')
+    body.css('a.square-btn @href').inner_text.gsub('mailto:', '')
   end
 
   field :facebook do
@@ -44,7 +46,7 @@ class CurrentMemberPage < Scraped::HTML
 
   field :memberships do
     noko.css('.body-text').xpath('//table[.//thead//td//p[.="Party"]]').first.css('tbody tr').map do |tr|
-      fragment tr => MembershipRow
+      (fragment tr => MembershipRow).to_h
     end
   end
 
