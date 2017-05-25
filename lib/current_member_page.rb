@@ -2,9 +2,11 @@
 
 require 'scraped'
 require_relative 'membership_row'
+require_relative 'deobfuscated_email_addresses'
 
 class CurrentMemberPage < Scraped::HTML
   decorator Scraped::Response::Decorator::CleanUrls
+  decorator DeobfuscatedEmailAddresses
 
   field :id do
     url.to_s.split('/').last
