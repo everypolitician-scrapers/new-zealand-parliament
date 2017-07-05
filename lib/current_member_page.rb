@@ -23,7 +23,7 @@ class CurrentMemberPage < Scraped::HTML
   end
 
   field :email do
-    body.css('a.square-btn').attr('href').inner_text.gsub('mailto:', '')
+    body.css('a.square-btn/@href').inner_text.gsub('mailto:', '')
   end
 
   field :facebook do
