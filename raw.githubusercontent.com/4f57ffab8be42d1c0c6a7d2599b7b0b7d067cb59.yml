@@ -17,8 +17,6 @@ response:
     code: 200
     message: OK
   headers:
-    Content-Type:
-    - text/plain; charset=utf-8
     Content-Security-Policy:
     - default-src 'none'; style-src 'unsafe-inline'
     Strict-Transport-Security:
@@ -30,42 +28,44 @@ response:
     X-Xss-Protection:
     - 1; mode=block
     Etag:
-    - W/"1259651c89bddf6be5b7ee3ebb732e59bda0b471"
+    - '"1259651c89bddf6be5b7ee3ebb732e59bda0b471"'
+    Content-Type:
+    - text/plain; charset=utf-8
     Cache-Control:
     - max-age=300
     X-Geo-Block-List:
     - ''
     X-Github-Request-Id:
-    - 6F88:23DCD:6C8268:75CA9C:5962CFC6
+    - A938:23DCE:CA61CC:DADDE5:5964F4BA
     Content-Length:
-    - '345'
+    - '320'
     Accept-Ranges:
     - bytes
     Date:
-    - Mon, 10 Jul 2017 00:52:23 GMT
+    - Tue, 11 Jul 2017 15:54:36 GMT
     Via:
     - 1.1 varnish
     Connection:
     - keep-alive
     X-Served-By:
-    - cache-sjc3621-SJC
+    - cache-sjc3634-SJC
     X-Cache:
     - MISS
     X-Cache-Hits:
     - '0'
     X-Timer:
-    - S1499647943.514579,VS0,VE976
+    - S1499788476.534277,VS0,VE992
     Vary:
-    - Authorization,Accept-Encoding, Accept-Encoding
+    - Authorization,Accept-Encoding
     Access-Control-Allow-Origin:
     - "*"
     X-Fastly-Request-Id:
-    - 2b648ef1bf1566b2f11efd4849f9abde52476bc1
+    - 12dca8b244e9ca175d1087cb5775975d078b1d43
     Expires:
-    - Mon, 10 Jul 2017 00:57:23 GMT
+    - Tue, 11 Jul 2017 15:59:36 GMT
     Source-Age:
     - '0'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Mon, 10 Jul 2017 00:52:23 GMT
+recorded_at: Tue, 11 Jul 2017 15:54:36 GMT
