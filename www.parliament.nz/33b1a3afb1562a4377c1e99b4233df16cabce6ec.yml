@@ -24,10 +24,10 @@ response:
     Vary:
     - Accept-Encoding
     Date:
-    - Tue, 22 Aug 2017 07:14:42 GMT
+    - Wed, 23 Aug 2017 08:46:51 GMT
     Content-Length:
-    - '11090'
+    - '11028'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Tue, 22 Aug 2017 07:14:43 GMT
+recorded_at: Wed, 23 Aug 2017 08:46:52 GMT
