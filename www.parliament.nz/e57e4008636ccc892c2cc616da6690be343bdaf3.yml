@@ -23,11 +23,15 @@ response:
     - text/html; charset=utf-8
     Vary:
     - Accept-Encoding
+    Strict-Transport-Security:
+    - max-age=31536000
+    Set-Cookie:
+    - ApplicationGatewayAffinity=7eeb87b4595ce0c5826bcde86afcdd9f4d8f327698068ffe92d9f0a16987e129;Path=/;Domain=www.parliament.nz
     Date:
-    - Wed, 06 Sep 2017 17:39:43 GMT
+    - Fri, 08 Sep 2017 00:37:17 GMT
     Content-Length:
-    - '10096'
+    - '10087'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Wed, 06 Sep 2017 17:39:44 GMT
+recorded_at: Fri, 08 Sep 2017 00:37:18 GMT
