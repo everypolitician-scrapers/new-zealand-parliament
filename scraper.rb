@@ -25,13 +25,15 @@ all_terms = CSV.parse(
   open(EPTERMS).read, headers: true, header_converters: :symbol
 ).map(&:to_h)
 
+WANTED = %w[51 52].to_set
+
 ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
 scrape(current => CurrentMembersPage).member_urls.each do |url|
   data = scrape(url => CurrentMemberPage).to_h
   memberships = data.delete(:memberships).map(&:to_h).each { |m| m[:id] = data[:id] }
   combined = CombinePopoloMemberships.combine(id: memberships, term: all_terms)
-  current = combined.select { |t| t[:term] == '51' }
+  current = combined.select { |t| WANTED.include? t[:term].to_s }
 
   wanted = %i[start_date end_date area party term]
   mems = current.map { |mem| data.merge(mem.keep_if { |k, _v| wanted.include? k }) }
