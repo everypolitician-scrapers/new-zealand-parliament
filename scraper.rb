@@ -25,7 +25,7 @@ all_terms = CSV.parse(
   open(EPTERMS).read, headers: true, header_converters: :symbol
 ).map(&:to_h)
 
-WANTED = %w[51 52].to_set
+WANTED = %w[52].to_set
 
 ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 current = 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/'
