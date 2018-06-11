@@ -36,36 +36,36 @@ response:
     X-Geo-Block-List:
     - ''
     X-Github-Request-Id:
-    - 9CBE:2122:48D08A0:4CA91D3:5B1D629E
+    - 6352:2126:561F535:5A68176:5B1EB738
     Content-Length:
     - '340'
     Accept-Ranges:
     - bytes
     Date:
-    - Sun, 10 Jun 2018 17:40:47 GMT
+    - Mon, 11 Jun 2018 17:54:01 GMT
     Via:
     - 1.1 varnish
     Connection:
     - keep-alive
     X-Served-By:
-    - cache-sjc3139-SJC
+    - cache-sjc3632-SJC
     X-Cache:
     - MISS
     X-Cache-Hits:
     - '0'
     X-Timer:
-    - S1528652447.237914,VS0,VE190
+    - S1528739641.859843,VS0,VE171
     Vary:
     - Authorization,Accept-Encoding
     Access-Control-Allow-Origin:
     - "*"
     X-Fastly-Request-Id:
-    - 37a623d8c39c635223b7095fd7b1d775b30925ab
+    - e3065599be73cd7fbf1dea043a6c037e25450f08
     Expires:
-    - Sun, 10 Jun 2018 17:45:47 GMT
+    - Mon, 11 Jun 2018 17:59:01 GMT
     Source-Age:
     - '0'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Sun, 10 Jun 2018 17:40:47 GMT
+recorded_at: Mon, 11 Jun 2018 17:54:01 GMT
