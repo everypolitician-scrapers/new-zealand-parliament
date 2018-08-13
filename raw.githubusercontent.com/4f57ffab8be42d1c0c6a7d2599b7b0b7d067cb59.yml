@@ -36,13 +36,13 @@ response:
     X-Geo-Block-List:
     - ''
     X-Github-Request-Id:
-    - 450C:0DA1:27EE7:2AAAC:5B70ABFB
+    - ED52:0DA1:20750D:21F6EB:5B713F6B
     Content-Length:
     - '340'
     Accept-Ranges:
     - bytes
     Date:
-    - Sun, 12 Aug 2018 21:51:55 GMT
+    - Mon, 13 Aug 2018 08:20:59 GMT
     Via:
     - 1.1 varnish
     Connection:
@@ -54,18 +54,18 @@ response:
     X-Cache-Hits:
     - '0'
     X-Timer:
-    - S1534110716.727353,VS0,VE271
+    - S1534148460.595676,VS0,VE174
     Vary:
     - Authorization,Accept-Encoding
     Access-Control-Allow-Origin:
     - "*"
     X-Fastly-Request-Id:
-    - cae29aa428af061129ecb9c00a8caef3e22c6bab
+    - 271181b571f40dcba02dfd294f8f04a42f94fbd9
     Expires:
-    - Sun, 12 Aug 2018 21:56:55 GMT
+    - Mon, 13 Aug 2018 08:25:59 GMT
     Source-Age:
     - '0'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Sun, 12 Aug 2018 21:51:56 GMT
+recorded_at: Mon, 13 Aug 2018 08:20:59 GMT
