@@ -28,10 +28,10 @@ response:
     Set-Cookie:
     - ApplicationGatewayAffinity=7eeb87b4595ce0c5826bcde86afcdd9f4d8f327698068ffe92d9f0a16987e129;Path=/;Domain=www.parliament.nz
     Date:
-    - Tue, 21 Aug 2018 05:00:46 GMT
+    - Wed, 22 Aug 2018 10:32:04 GMT
     Content-Length:
-    - '12537'
+    - '12539'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Tue, 21 Aug 2018 05:00:47 GMT
+recorded_at: Wed, 22 Aug 2018 10:32:04 GMT
