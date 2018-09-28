@@ -24,8 +24,8 @@ response:
     Vary:
     - Accept-Encoding
     Set-Cookie:
-    - ApplicationGatewayAffinity=20c92632dbc67dd8b5b8cd8b964b40a4389bf041beb838e14f6afb8b05805f5a;Path=/;Domain=www.parliament.nz
-    - dtCookie==3=srv=2=sn=AF680E5984D2FE6D00FE5979D1995F02=perc=100000=ol=0=mul=1;
+    - ApplicationGatewayAffinity=7eeb87b4595ce0c5826bcde86afcdd9f4d8f327698068ffe92d9f0a16987e129;Path=/;Domain=www.parliament.nz
+    - dtCookie==3=srv=2=sn=16CB18A26BAA58C237BBE5D4FEB90491=perc=100000=ol=0=mul=1;
       Path=/; Domain=.www.parliament.nz
     Strict-Transport-Security:
     - max-age=31536000
@@ -34,10 +34,10 @@ response:
     X-Ruxit-Js-Agent:
     - 'true'
     Date:
-    - Thu, 27 Sep 2018 10:45:16 GMT
+    - Fri, 28 Sep 2018 16:49:49 GMT
     Content-Length:
-    - '10211'
+    - '10187'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Thu, 27 Sep 2018 10:45:16 GMT
+recorded_at: Fri, 28 Sep 2018 16:49:50 GMT
