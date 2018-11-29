@@ -19,7 +19,7 @@ def scrape(h)
   klass.new(response: Scraped::Request.new(url: url).response)
 end
 
-EPTERMS = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/New_Zealand/House/sources/manual/terms.csv'
+EPTERMS = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/New_Zealand/House/sources/morph/terms.csv'
 all_terms = CSV.parse(
   open(EPTERMS).read, headers: true, header_converters: :symbol
 ).map(&:to_h)
