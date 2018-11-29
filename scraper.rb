@@ -37,7 +37,7 @@ scrape(current => CurrentMembersPage).member_urls.each do |url|
   wanted = %i[start_date end_date area party term]
   mems = current.map { |mem| data.merge(mem.keep_if { |k, _v| wanted.include? k }) }
   mems.each { |mem| puts mem.reject { |_, v| v.to_s.empty? }.sort_by { |k, _| k }.to_h } if ENV['MORPH_DEBUG']
-  raise "No memberships on #{url}" if mems.empty?
+  warn "No current memberships on #{url}" if mems.empty?
 
   ScraperWiki.save_sqlite(%i[id term start_date], mems)
   rows = ScraperWiki.select('COUNT(*) AS rows FROM data WHERE id = ?', data[:id]).first['rows']
